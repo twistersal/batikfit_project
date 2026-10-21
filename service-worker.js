@@ -1,10 +1,11 @@
-const CACHE_NAME = "batikfit-shell-v1";
+const CACHE_NAME = "batikfit-shell-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./icon-192.png",
-  "./icon-512.png"
+  "./icon-512.png",
+  "./assets/guardian-cat.jpg"
 ];
 
 self.addEventListener("install", (event) => {

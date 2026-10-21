@@ -45,3 +45,7 @@ Karena aplikasi hanya terdiri dari file statis, hasil ZIP dapat dibuka dan dijal
 ## Catatan
 
 Aplikasi ini adalah demo mandiri. Proyek BatikFit WebDev utama tetap terpisah dari folder ini.
+
+## Aksi tracker
+
+Demo mendukung edit jadwal, tambah hari, tambah makanan, input kalori/protein/carbs/fats/air/langkah/catatan, hapus makanan, hapus tracker hari ini, dan **Undo terakhir**. Perubahan disimpan lokal di browser melalui `localStorage`.
