@@ -6,6 +6,10 @@ BatikFit adalah fitness dan nutrition tracker personal dengan tampilan batik min
 
 `index.html` adalah entry point utama aplikasi. Cukup buka file tersebut di browser untuk menjalankan demo.
 
+## Install sebagai aplikasi
+
+Buka aplikasi melalui HTTPS (misalnya GitHub Pages), lalu pilih **Install app** atau **Tambahkan ke layar utama** dari menu browser. Service worker akan menyimpan shell aplikasi agar dapat dibuka kembali saat offline.
+
 ## Penyimpanan data
 
 Semua input disimpan di `localStorage` browser:
