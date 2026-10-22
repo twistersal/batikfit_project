@@ -24,9 +24,9 @@
       <div class="rail-note"><strong>Ritme hari ini</strong> Shift Pagi · tubuhmu siap bergerak pelan tapi konsisten.<br><br><span style="color:var(--copper-2)">●</span> 67% target harian tercapai</div>
     </aside>
     <main class="main">
-      <header class="topbar"><div><div class="eyebrow">Selasa, 21 Oktober 2026</div><h2>Jaga ritmemu.</h2></div><div id="currentDate" class="date">⌁ Hari ini <span style="color:var(--copper-2)">•</span> 66 kg</div></header>
+      <header class="topbar"><div><div id="todayEyebrow" class="eyebrow">Hari ini</div><h2>Jaga ritmemu.</h2></div><div id="currentDate" class="date">⌁ 66 kg</div></header>
       <div id="dashboardView"><section class="hero">
-        <div class="hero-card"><span class="pill">● SHIFT SIANG · 14:00—22:00</span><h3>Core & cardio day</h3><p>Hari ini fokus pada core yang stabil dan jalan cepat yang menyesuaikan energimu. Workout dimulai pukul 09:00, sebelum shift.</p><div class="hero-actions"><button class="primary" onclick="scrollToId('timeline')">Lihat timeline →</button><button id="workoutAction" class="ghost" onclick="toggleCheck('workout')">Tandai workout</button></div></div>
+        <div class="hero-card"><span id="todayShift" class="pill">● SHIFT SIANG · 14:00—22:00</span><h3 id="todayRoutine">Core & cardio day</h3><p id="todayMessage">Stabilize your core and energize your walks. Start work out at 09.00 AM before your shift.</p><div class="hero-actions"><button class="primary" onclick="scrollToId('timeline')">Lihat timeline →</button><button id="workoutAction" class="ghost" onclick="toggleCheck('workout')">Tandai workout</button></div></div>
         <div class="focus-card card"><div class="focus-head"><span>Progress hari ini</span><b>8.000</b></div><div class="ring"><strong id="stepsPercent">0%</strong></div><div class="focus-foot"><span id="stepsSummary">0 / 8.000 langkah</span><strong id="stepsRemaining">+ 8.000 lagi</strong></div></div>
       </section>
       <section class="grid">
@@ -124,13 +124,29 @@
     }
     function addWorkoutCard(){openModal('Tambah kartu workout','<form id="modalForm"><div class="modal-grid"><label class="modal-full">Nama kartu<input name="title" required placeholder="Strength / Mobility"></label><label class="modal-full">Deskripsi singkat<input name="subtitle" placeholder="Durasi dan fokus"></label><label class="modal-full">Daftar latihan<textarea name="items" placeholder="Nama latihan | 3 × 12\nLatihan berikutnya | 10 min"></textarea></label></div><div class="modal-actions"><button type="button" class="ghost" onclick="closeModal()">Batal</button><button class="primary">Tambah kartu</button></div></form>',(data)=>{snapshot();const items=data.get('items').split(/\r?\n/).map(line=>line.trim()).filter(Boolean).map(line=>{const parts=line.split('|');return [parts[0].trim(),(parts[1]||'').trim()]});enhanced.workoutCards.push({id:'workout-'+Date.now(),title:data.get('title'),subtitle:data.get('subtitle'),items});persist();renderWorkoutCards();closeModal();showToast('Kartu workout ditambahkan');});}
     function removeWorkoutCard(index){if(!confirm('Hapus kartu workout ini?'))return;snapshot();enhanced.workoutCards.splice(index,1);persist();renderWorkoutCards();showToast('Kartu workout dihapus');}
+    function formatWorkoutTime(time){
+      const match=String(time||'').match(/^(\d{1,2}):(\d{2})$/);if(!match)return time||'sesuai energi';
+      let h=Number(match[1]);const min=match[2];const suffix=h>=12?'PM':'AM';h=h%12||12;return `${String(h).padStart(2,'0')}.${min} ${suffix}`;
+    }
+    function renderTodayCard(){
+      const today=getTodayLabel(), item=enhanced.schedule.find(x=>x.day===today)||enhanced.schedule[0];if(!item)return;
+      const routine=String(item.routine||'').toLowerCase(), time=formatWorkoutTime(item.time);
+      const shiftNames={P:'SHIFT PAGI · 09:00—17:00',S:'SHIFT SIANG · 14:00—22:00',M11:'SHIFT MIDDLE · 11:00—19:00'};
+      let title=item.routine+' Day', message='Plan your day with intention and keep your rhythm steady.';
+      if(routine.includes('core')||routine.includes('cardio')){title='Core & Cardio Day';message=`Stabilize your core and energize your walks. Start work out at ${time} before your shift.`;}
+      else if(routine.includes('active rest')){title='Active Rest Day';message='Rest your body, Rest your life. Make your day happy and complete the Walk Quest!';}
+      else if(routine.includes('total rest')){title='Total Rest Day';message='Rest totally, as your life goes happily. Please enjoy your day and prepare your meals!';}
+      else if(routine.includes('lower body')){title=(/lower body b/i.test(item.routine)?'Lower Body B':'Lower Body A')+' Day';message=`Let's burn your Lower Body, as hot as you wish! Start work out at ${time}. Burn them, Sängharal, Burn them all!`;}
+      const shift=document.getElementById('todayShift'),heading=document.getElementById('todayRoutine'),copy=document.getElementById('todayMessage');
+      if(shift)shift.textContent='● '+(shiftNames[item.shift]||('SHIFT '+item.shift));if(heading)heading.textContent=title;if(copy)copy.textContent=message;
+    }
     function getTodayLabel(){return ['Min','Sen','Sel','Rab','Kam','Jum','Sab'][new Date().getDay()]}
-    function renderCurrentDate(){const now=new Date();const el=document.getElementById('currentDate');if(el)el.innerHTML=`⌁ ${now.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} <span style="color:var(--copper-2)">•</span> 66 kg`}
+    function renderCurrentDate(){const now=new Date();const dateText=now.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});const left=document.getElementById('todayEyebrow'),right=document.getElementById('currentDate');if(left)left.textContent=dateText;if(right)right.textContent='⌁ 66 kg';}
     function renderSchedule(){
       const today=getTodayLabel();
       const rows=enhanced.schedule.map(x=>`<div class="schedule-row ${x.day===today?'today':''}"><div class="day">${x.day}</div><div class="routine"><span class="dot ${/rest/i.test(x.routine)?'rest':''}"></span><div><b>${x.routine}</b><span>${x.time} · Shift ${x.shift}</span></div></div><span class="shift">${x.shift}</span></div>`).join('');
       document.querySelectorAll('#dashboardView .schedule,[data-panel="schedule"] .schedule').forEach(el=>el.innerHTML=rows);
-      renderCurrentDate();
+      renderCurrentDate();renderTodayCard();
     }
     function editSchedule(){openModal('Edit jadwal','<form id="modalForm"><div class="modal-grid"><label>Hari<select name="day">'+enhanced.schedule.map(x=>`<option>${x.day}</option>`).join('')+'</select></label><label>Shift<select name="shift"><option>P</option><option>S</option><option>M11</option></select></label><label class="modal-full">Rutinitas<input name="routine" required placeholder="Lower body A"></label><label>Waktu<input name="time" required placeholder="19:00"></label></div><div class="modal-actions"><button type="button" class="ghost" onclick="closeModal()">Batal</button><button class="primary">Simpan perubahan</button></div></form>',(data)=>{snapshot();const row=enhanced.schedule.find(x=>x.day===data.get('day'));if(row){row.shift=data.get('shift');row.routine=data.get('routine');row.time=data.get('time')}persist();renderSchedule();closeModal();showToast('Jadwal diperbarui');});}
     function addDay(){openModal('Tambah hari','<form id="modalForm"><div class="modal-grid"><label>Label hari<input name="day" required placeholder="Extra"></label><label>Shift<select name="shift"><option>P</option><option>S</option><option>M11</option></select></label><label class="modal-full">Rutinitas<input name="routine" required placeholder="Active rest"></label><label>Waktu<input name="time" required placeholder="Recovery"></label></div><div class="modal-actions"><button type="button" class="ghost" onclick="closeModal()">Batal</button><button class="primary">Tambah hari</button></div></form>',(data)=>{snapshot();enhanced.schedule.push({day:data.get('day'),shift:data.get('shift'),routine:data.get('routine'),time:data.get('time')});persist();renderSchedule();closeModal();showToast('Hari baru ditambahkan');});}
