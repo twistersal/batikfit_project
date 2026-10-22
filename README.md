@@ -61,3 +61,5 @@ Card pertama Ringkasan mengikuti hari aktual, shift, rutinitas, dan jam workout 
 Timeline dapat ditambah melalui tombol plus, diurutkan berdasarkan waktu, dan dapat di-hold untuk memilih Edit atau Hapus. Kebiasaan custom juga dapat ditambah melalui tombol plus.
 
 Card header Jadwal dan Target Nutrisi menggunakan alignment inline; highlight hari diperlebar agar isi tidak tertekan.
+
+Pada layar smartphone, mode calm mengurangi motif batik, border, shadow, nested card, dan padding agar konten tidak terasa bertumpuk.
