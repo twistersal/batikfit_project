@@ -57,3 +57,7 @@ Demo mendukung edit jadwal, tambah hari, tambah makanan, input kalori/protein/ca
 Jadwal otomatis menyorot hari aktual berdasarkan tanggal perangkat, jadi ketika hari ini Kamis baris Kamis akan menjadi highlight.
 
 Card pertama Ringkasan mengikuti hari aktual, shift, rutinitas, dan jam workout dari jadwal yang tersimpan.
+
+Timeline dapat ditambah melalui tombol plus, diurutkan berdasarkan waktu, dan dapat di-hold untuk memilih Edit atau Hapus. Kebiasaan custom juga dapat ditambah melalui tombol plus.
+
+Card header Jadwal dan Target Nutrisi menggunakan alignment inline; highlight hari diperlebar agar isi tidak tertekan.
