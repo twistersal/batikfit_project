@@ -132,14 +132,27 @@
       const today=getTodayLabel(), item=enhanced.schedule.find(x=>x.day===today)||enhanced.schedule[0];if(!item)return;
       const routine=String(item.routine||'').toLowerCase(), time=formatWorkoutTime(item.time);
       const shiftNames={P:'SHIFT PAGI · 09:00—17:00',S:'SHIFT SIANG · 14:00—22:00',M11:'SHIFT MIDDLE · 11:00—19:00'};
-      let title=item.routine+' Day', message='Plan your day with intention and keep your rhythm steady.';
-      if(routine.includes('core')||routine.includes('cardio')){title='Core & Cardio Day';message=`Stabilize your core and energize your walks. Start work out at ${time} before your shift.`;}
-      else if(routine.includes('active rest')){title='Active Rest Day';message='Rest your body, Rest your life. Make your day happy and complete the Walk Quest!';}
-      else if(routine.includes('total rest')){title='Total Rest Day';message='Rest totally, as your life goes happily. Please enjoy your day and prepare your meals!';}
-      else if(routine.includes('lower body')){title=(/lower body b/i.test(item.routine)?'Lower Body B':'Lower Body A')+' Day';message=`Let's burn your Lower Body, as hot as you wish! Start work out at ${time}. Burn them, Sängharal, Burn them all!`;}
+      let title='Workout Day', message='';
+      if(routine.includes('core')||routine.includes('cardio')){
+        title='Core & Cardio Day';
+        message=`Stabilize your core and energize your walks. Start work out at ${time} before your shift.`;
+      } else if(routine.includes('total rest')){
+        title='Total Rest Day';
+        message='Rest totally, as your life goes happily. Please enjoy your day and prepare your meals!';
+      } else if(routine.includes('active rest')||routine==='rest day'||routine==='rest'||routine.includes('recovery')||routine.includes('active')){
+        title='Active Rest Day';
+        message='Rest your body, Rest your life. Make your day happy and complete the Walk Quest!';
+      } else if(routine.includes('lower body')){
+        title=(/lower body b/i.test(item.routine)?'Lower Body B':'Lower Body A')+' Day';
+        message=`Let's burn your Lower Body, as hot as you wish! Start work out at ${time}. Burn them, Sängharal, Burn them all!`;
+      } else {
+        title=item.routine||'Workout Day';
+        message='Plan your day with intention and keep your rhythm steady.';
+      }
       const shift=document.getElementById('todayShift'),heading=document.getElementById('todayRoutine'),copy=document.getElementById('todayMessage');
       if(shift)shift.textContent='● '+(shiftNames[item.shift]||('SHIFT '+item.shift));if(heading)heading.textContent=title;if(copy)copy.textContent=message;
     }
+
     function getTodayLabel(){return ['Min','Sen','Sel','Rab','Kam','Jum','Sab'][new Date().getDay()]}
     function renderCurrentDate(){const now=new Date();const dateText=now.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});const left=document.getElementById('todayEyebrow'),right=document.getElementById('currentDate');if(left)left.textContent=dateText;if(right)right.textContent='⌁ 66 kg';}
     function renderSchedule(){
