@@ -63,3 +63,9 @@ Timeline dapat ditambah melalui tombol plus, diurutkan berdasarkan waktu, dan da
 Card header Jadwal dan Target Nutrisi menggunakan alignment inline; highlight hari diperlebar agar isi tidak tertekan.
 
 Pada layar smartphone, mode calm mengurangi motif batik, border, shadow, nested card, dan padding agar konten tidak terasa bertumpuk.
+
+Semua input numerik mendukung bilangan bulat dan desimal dengan `step="any"`, termasuk input nutrisi dan makanan.
+
+Setelah setiap input, ringkasan langsung diperbarui dan aplikasi mengarahkan pengguna ke progress atau jadwal yang relevan.
+
+Target Nutrisi dapat diklik untuk mengubah kalori, protein, karbohidrat, lemak, dan gula; progress menampilkan status to accomplish, Target accomplished, atau Warning, Overtarget detected.
