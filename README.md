@@ -53,3 +53,5 @@ Carousel workout dapat di-swipe horizontal. Pengguna dapat menambah kartu workou
 ## Aksi tracker
 
 Demo mendukung edit jadwal, tambah hari, tambah makanan, input kalori/protein/carbs/fats/air/langkah/catatan, hapus makanan, hapus tracker hari ini, dan **Undo terakhir**. Perubahan disimpan lokal di browser melalui `localStorage`.
+
+Jadwal otomatis menyorot hari aktual berdasarkan tanggal perangkat, jadi ketika hari ini Kamis baris Kamis akan menjadi highlight.
