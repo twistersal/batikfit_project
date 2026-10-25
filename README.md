@@ -69,3 +69,5 @@ Semua input numerik mendukung bilangan bulat dan desimal dengan `step="any"`, te
 Setelah setiap input, ringkasan langsung diperbarui dan aplikasi mengarahkan pengguna ke progress atau jadwal yang relevan.
 
 Target Nutrisi dapat diklik untuk mengubah kalori, protein, karbohidrat, lemak, dan gula; progress menampilkan status to accomplish, Target accomplished, atau Warning, Overtarget detected.
+
+Shift tersedia: P (09:00–17:00), LK2 (09:00–19:00), 11 (11:00–19:00), 12 (12:00–20:00), 12L (12:00–22:00), dan S (14:00–22:00). Pergantian tanggal mengarsipkan hari sebelumnya dan me-reset tracker harian.
