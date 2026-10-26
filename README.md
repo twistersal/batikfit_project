@@ -71,3 +71,11 @@ Setelah setiap input, ringkasan langsung diperbarui dan aplikasi mengarahkan pen
 Target Nutrisi dapat diklik untuk mengubah kalori, protein, karbohidrat, lemak, dan gula; progress menampilkan status to accomplish, Target accomplished, atau Warning, Overtarget detected.
 
 Shift tersedia: P (09:00–17:00), LK2 (09:00–19:00), 11 (11:00–19:00), 12 (12:00–20:00), 12L (12:00–22:00), dan S (14:00–22:00). Pergantian tanggal mengarsipkan hari sebelumnya dan me-reset tracker harian.
+
+Shift OFF tersedia sebagai hari libur. Riwayat kalender dapat dihapus permanen melalui tombol minus setelah konfirmasi; reset tanggal juga mengosongkan makanan, timeline, checklist, dan status workout harian.
+
+Fitur Undo terakhir telah dihapus; penghapusan riwayat kalender tetap menggunakan konfirmasi hapus permanen.
+
+Page aktif bertahan saat refresh; page Workout memiliki grafik berat badan 7 hari dengan carry-forward, dan Timeline juga tersedia di page Jadwal. Progress langkah memakai cincin air dengan target 2700 liter.
+
+Reset harian mengosongkan seluruh timeline dan checklist tanpa sisa strikethrough; Timeline pada page Jadwal memiliki tombol plus sendiri.
