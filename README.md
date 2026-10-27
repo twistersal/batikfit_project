@@ -79,3 +79,13 @@ Fitur Undo terakhir telah dihapus; penghapusan riwayat kalender tetap menggunaka
 Page aktif bertahan saat refresh; page Workout memiliki grafik berat badan 7 hari dengan carry-forward, dan Timeline juga tersedia di page Jadwal. Progress langkah memakai cincin air dengan target 2700 liter.
 
 Reset harian mengosongkan seluruh timeline dan checklist tanpa sisa strikethrough; Timeline pada page Jadwal memiliki tombol plus sendiri.
+
+Page Workout memakai layout dua kolom desktop (library workout + grafik berat) dan satu kolom smartphone, dengan overflow horizontal dikunci pada viewport.
+
+Card progress menampilkan 8000 jalan dan 2700 liter di kanan atas; card Workout dan grafik berat dirapatkan dalam satu baris desktop tanpa ruang kosong berlebih.
+
+Struktur Workout menggunakan wrapper normal di dalam main.main; header panel, carousel, grafik, dan tombol tetap berada dalam alur dokumen tanpa overlap atau keluar viewport.
+
+Final layout rule: Workout dan Input menggunakan normal flow main.main, panel heading diikuti card langsung, tanpa position/float/overflow yang dapat menabrak teks.
+
+DOM mount repair memastikan semua section page-panel (termasuk Workout dan Input) menjadi anak langsung main.main sebelum navigasi dirender.
