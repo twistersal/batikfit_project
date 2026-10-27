@@ -137,11 +137,20 @@
     function toggleCheck(id){const el=document.getElementById(id);if(el){el.checked=true;enhanced.workoutDone=true;updateChecks();persist();refreshAndGo('scheduleSummary');}}
     function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}
 
+    function getTodayDateText() {
+  return new Date().toLocaleDateString('id-ID', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
     function showPage(page){
       document.querySelectorAll('[data-page]').forEach(btn=>btn.classList.toggle('active',btn.dataset.page===page));
       document.querySelector('#dashboardView').style.display=page==='dashboard'?'block':'none';
       document.querySelectorAll('[data-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.panel===page));
-      const titles={dashboard:['Selasa, 21 Oktober 2026','Jaga ritmemu.'],schedule:['Jadwal minggu','Ritme yang bisa kamu lihat.'],workout:['Workout library','Gerak dengan niat.'],input:['Input harian','Catat progresmu.']};
+      const titles={dashboard:[getTodayDateText(),'Jaga ritmemu.'],schedule:['Jadwal minggu','Ritme yang bisa kamu lihat.'],workout:['Workout library','Gerak dengan niat.'],input:['Input harian','Catat progresmu.']};
       document.querySelector('.eyebrow').textContent=titles[page][0];document.querySelector('.topbar h2').textContent=titles[page][1];
       window.scrollTo({top:0,behavior:'smooth'});
       localStorage.setItem('batikfit-active-page',page);
