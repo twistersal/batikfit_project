@@ -83,13 +83,15 @@
     #pageViewport{display:contents}#pageStage{display:contents}
   
     .meal-add{width:34px;height:34px;border:1px solid var(--copper);border-radius:50%;background:var(--copper);color:#241719;font-size:24px;font-weight:700;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 18px #d7825930}.meal-add:hover{background:var(--copper-2);border-color:var(--copper-2);color:#241719}.meal-add:focus-visible{outline:2px solid var(--copper-2);outline-offset:3px}
+  
+    .nav button,.mobile-nav button{justify-content:center}.nav .nav-icon{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:var(--copper-2)}.nav button[data-page="dashboard"] .nav-icon{width:38px;height:38px;stroke-width:1.7}.mobile-nav .nav-icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.mobile-nav button[data-page="dashboard"] .nav-icon{width:34px;height:34px;stroke-width:1.7}
   </style>
 </head>
 <body>
   <div class="app">
     <aside class="rail">
       <div class="brand"><div class="brand-mark"><img src="./assets/guardian-cat.jpg" alt="Kucing ksatria BatikFit" /></div><div><h1>BatikFit</h1><small>personal rhythm</small></div></div>
-      <nav class="nav"><button data-page="workout"><i>◌</i> Workout library</button><button class="active" data-page="dashboard"><i>⌂</i> Ringkasan</button><button data-page="schedule"><i>◷</i> Jadwal minggu</button></nav>
+      <nav class="nav"><button data-page="workout" aria-label="Workout"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4.5" r="2"/><path d="M11.5 8 9 12l2 2.5-1 5.5M11 10l4 2 2 4M9.5 20.5 7 22M10 14.5l4 1 2 5"/></svg></button><button class="active" data-page="dashboard" aria-label="Ringkasan"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button><button data-page="schedule" aria-label="Jadwal"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M7 14h2M11 14h2M15 14h2M7 18h2M11 18h2"/></svg></button></nav>
       <div class="rail-note"><strong>Ritme hari ini</strong><span id="desktopScheduleSync">Shift hari ini · jadwal tersinkron</span><br><br><span style="color:var(--copper-2)">●</span> <span id="overallProgressDesktop">0%</span> total progress</div>
     </aside>
     <main class="main">
@@ -133,7 +135,7 @@
       <div id="actionModal" class="modal-backdrop" role="dialog" aria-modal="true"><div class="modal"><div class="modal-head"><h3 id="modalTitle">Aksi</h3><button class="modal-close" onclick="closeModal()">×</button></div><div id="modalBody"></div></div></div><div id="toast" class="toast"></div>
     </main>
   </div>
-  <nav class="mobile-nav"><button data-page="workout"><b>◌</b>Workout</button><button class="active" data-page="dashboard"><b>⌂</b>Ringkasan</button><button data-page="schedule"><b>◷</b>Jadwal</button></nav>
+  <nav class="mobile-nav"><button data-page="workout" aria-label="Workout"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4.5" r="2"/><path d="M11.5 8 9 12l2 2.5-1 5.5M11 10l4 2 2 4M9.5 20.5 7 22M10 14.5l4 1 2 5"/></svg></button><button class="active" data-page="dashboard" aria-label="Ringkasan"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button><button data-page="schedule" aria-label="Jadwal"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M7 14h2M11 14h2M15 14h2M7 18h2M11 18h2"/></svg></button></nav>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js"));
