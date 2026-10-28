@@ -1,4 +1,4 @@
-const CACHE_NAME = "batikfit-shell-v35";
+const CACHE_NAME = "batikfit-shell-v36";
 const APP_SHELL = [
   "./",
   "./index.html",
